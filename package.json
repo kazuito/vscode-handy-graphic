@@ -9,6 +9,7 @@
   "categories": [
     "Other"
   ],
+  "publisher": "kazuito",
   "repository": {
     "type": "git",
     "url": "https://github.com/kazuito/vscode-handy-graphic.git"

@@ -3,6 +3,8 @@ import * as path from "path";
 
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand("handy-graphic.run", () => {
+    const config = vscode.workspace.getConfiguration("handy-graphic");
+
     const dir = path.dirname(
       vscode.window.activeTextEditor?.document.fileName || ""
     );
@@ -33,6 +35,10 @@ export function activate(context: vscode.ExtensionContext) {
     terminal.sendText(
       `cd "${dir}" && hgcc -Wall -o "${outFileName}" "./${fileName}" && "./${outFileName}"`
     );
+
+    if (config.get("showTerminal")) {
+      terminal.show();
+    }
   });
 
   context.subscriptions.push(disposable);

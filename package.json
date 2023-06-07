@@ -33,7 +33,19 @@
           "group": "navigation"
         }
       ]
-    }
+    },
+    "configuration": [
+      {
+        "title": "Handy Graphic",
+        "properties": {
+          "handy-graphic.showTerminal": {
+            "type": "boolean",
+            "default": true,
+            "description": "「HandyGraphicを実行」をした際にターミナルを表示する。"
+          }
+        }
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

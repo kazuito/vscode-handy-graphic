@@ -42,6 +42,11 @@
             "type": "boolean",
             "default": true,
             "description": "「HandyGraphicを実行」をした際にターミナルを表示する。"
+          },
+          "handy-graphic.saveAllFilesBeforeRun": {
+            "type": "boolean",
+            "default": true,
+            "description": "実行が行われる前に、全てのファイルを保存する。"
           }
         }
       }

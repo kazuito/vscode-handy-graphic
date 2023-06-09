@@ -6,4 +6,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [v0.0.2]
+
+- Added new settings
+  - `showTerminal`
+  - `saveAllFilesBeforeRun`
+  - `command`
+
+## [v0.0.1]
+
 - Initial release

@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import * as path from "path";
+import { genOutFilePath } from "./utils";
 
 const terminalNames = {
   main: "HandyGraphic",
@@ -26,7 +27,17 @@ export function activate(context: vscode.ExtensionContext) {
       const dirAbsPath = path.dirname(fileAbsPath);
       const fileName = path.basename(fileAbsPath);
       const fileExt = path.extname(fileAbsPath);
-      const outFileName = path.basename(fileAbsPath, fileExt);
+      const fileNameWithoutExt = path.basename(fileAbsPath, fileExt);
+
+      const fileInfo = {
+        fileName: fileName,
+        fileNameWithoutExt: fileNameWithoutExt,
+        fileExt: fileExt,
+        fileAbsPath: fileAbsPath,
+        dirAbsPath: dirAbsPath,
+      };
+
+      const command = genOutFilePath(config.get("command") || "", fileInfo);
 
       // Save all files before run
       if (config.get("saveAllFilesBeforeRun")) {
@@ -52,9 +63,7 @@ export function activate(context: vscode.ExtensionContext) {
       const mainTerminal =
         vscode.window.terminals.find((t) => t.name === terminalNames.main) ||
         vscode.window.createTerminal(terminalNames.main);
-      mainTerminal.sendText(
-        `cd "${dirAbsPath}" && hgcc -Wall -o "${outFileName}" "./${fileName}" && "./${outFileName}"`
-      );
+      mainTerminal.sendText(command);
 
       if (config.get("showTerminal")) {
         mainTerminal.show();

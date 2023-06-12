@@ -14,8 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       const config = vscode.workspace.getConfiguration("handy-graphic");
 
-      const fileAbsPath =
-        vscode.window.activeTextEditor?.document.fileName || "";
+      const fileAbsPath = vscode.window.activeTextEditor?.document.fileName;
 
       if (!fileAbsPath) {
         vscode.window.showErrorMessage(
@@ -29,13 +28,15 @@ export function activate(context: vscode.ExtensionContext) {
       const fileExt = path.extname(fileAbsPath);
       const fileNameWithoutExt = path.basename(fileAbsPath, fileExt);
 
-      const fileInfo = {
+      const fileInfo: FileInfo = {
         fileName: fileName,
         fileNameWithoutExt: fileNameWithoutExt,
         fileExt: fileExt,
         fileAbsPath: fileAbsPath,
         dirAbsPath: dirAbsPath,
       };
+
+      const hgPath = `/Applications/HgDisplayer.app/Contents/MacOS/HgDisplayer`;
 
       const command = genOutFilePath(config.get("command") || "", fileInfo);
 
@@ -44,22 +45,20 @@ export function activate(context: vscode.ExtensionContext) {
         await vscode.workspace.saveAll();
       }
 
-      // kill the app/HgDisplayer
+      // Kill the app/HgDisplayer
       const killerTerminal =
         vscode.window.terminals.find((t) => t.name === terminalNames.killer) ||
         vscode.window.createTerminal(terminalNames.killer);
       killerTerminal.sendText("killall HgDisplayer");
 
-      // run the HgDisplayer
+      // Run the HgDisplayer
       const displayerTerminal =
         vscode.window.terminals.find(
           (t) => t.name === terminalNames.displayer
         ) || vscode.window.createTerminal(terminalNames.displayer);
-      displayerTerminal.sendText(
-        `/Applications/HgDisplayer.app/Contents/MacOS/HgDisplayer`
-      );
+      displayerTerminal.sendText(hgPath);
 
-      // compile and run the app
+      // Compile and run the app
       const mainTerminal =
         vscode.window.terminals.find((t) => t.name === terminalNames.main) ||
         vscode.window.createTerminal(terminalNames.main);

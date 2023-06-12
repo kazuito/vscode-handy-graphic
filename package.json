@@ -19,7 +19,10 @@
     "url": "https://github.com/kazuito/vscode-handy-graphic.git"
   },
   "icon": "icon.png",
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

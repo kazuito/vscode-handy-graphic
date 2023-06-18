@@ -1,8 +1,8 @@
 {
   "name": "handy-graphic",
   "displayName": "Handy Graphic",
-  "description": "",
-  "version": "0.0.2",
+  "description": "コンパイルから実行までワンクリックで行います。",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.78.0"
   },

@@ -45,28 +45,35 @@ export function activate(context: vscode.ExtensionContext) {
         await vscode.workspace.saveAll();
       }
 
-      // Kill the app/HgDisplayer
       const killerTerminal =
         vscode.window.terminals.find((t) => t.name === terminalNames.killer) ||
         vscode.window.createTerminal(terminalNames.killer);
-      killerTerminal.sendText("killall HgDisplayer");
 
-      // Run the HgDisplayer
       const displayerTerminal =
         vscode.window.terminals.find(
           (t) => t.name === terminalNames.displayer
         ) || vscode.window.createTerminal(terminalNames.displayer);
-      displayerTerminal.sendText(hgPath);
 
-      // Compile and run the app
       const mainTerminal =
         vscode.window.terminals.find((t) => t.name === terminalNames.main) ||
         vscode.window.createTerminal(terminalNames.main);
-      mainTerminal.sendText(command);
 
       if (config.get("showTerminal")) {
         mainTerminal.show();
       }
+
+      // Kill the app/HgDisplayer
+      killerTerminal.sendText(
+        `killall ${fileNameWithoutExt} && killall HgDisplayer`
+      );
+      await sleep(100);
+
+      // Run the HgDisplayer
+      displayerTerminal.sendText(hgPath);
+      await sleep(100);
+
+      // Compile and run the app
+      mainTerminal.sendText(command);
     }
   );
 
@@ -74,3 +81,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {}
+
+async function sleep(milliseconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}

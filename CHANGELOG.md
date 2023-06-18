@@ -6,6 +6,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+- Added new setting `clearTerminal`
+- Several updates to avoid errors.
+
 ## [v0.0.2]
 
 - Added new settings

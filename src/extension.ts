@@ -72,6 +72,11 @@ export function activate(context: vscode.ExtensionContext) {
       displayerTerminal.sendText(hgPath);
       await sleep(100);
 
+      if (config.get("clearTerminal")) {
+        mainTerminal.sendText("clear");
+        await sleep(50);
+      }
+
       // Compile and run the app
       mainTerminal.sendText(command);
     }

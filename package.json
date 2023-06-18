@@ -50,6 +50,11 @@
             "default": true,
             "description": "「HandyGraphicを実行」をした際にターミナルを表示する。"
           },
+          "handy-graphic.clearTerminal": {
+            "type": "boolean",
+            "default": true,
+            "description": "「HandyGraphicを実行」をした際にターミナルをクリアする。"
+          },
           "handy-graphic.saveAllFilesBeforeRun": {
             "type": "boolean",
             "default": true,

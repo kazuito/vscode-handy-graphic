@@ -34,6 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
         fileExt: fileExt,
         fileAbsPath: fileAbsPath,
         dirAbsPath: dirAbsPath,
+        token: config.get("token") || "",
       };
 
       const hgPath = `/Applications/HgDisplayer.app/Contents/MacOS/HgDisplayer`;
@@ -63,9 +64,9 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       // Kill the app/HgDisplayer
-      killerTerminal.sendText(
-        `killall ${fileNameWithoutExt} && killall HgDisplayer`
-      );
+      killerTerminal.sendText(`killall ${fileNameWithoutExt}__hgapp`);
+      await sleep(100);
+      killerTerminal.sendText(`killall HgDisplayer`);
       await sleep(100);
 
       // Run the HgDisplayer

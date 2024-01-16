@@ -62,8 +62,12 @@
           },
           "handy-graphic.command": {
             "type": "string",
-            "default": "cd \"${dirAbsPath}\" && hgcc -Wall -o \"${fileNameWithoutExt}\" \"./${fileName}\" && \"./${fileNameWithoutExt}\"",
+            "default": "cd \"${dirAbsPath}\" && hgcc -Wall -o \"./bin/${fileNameWithoutExt}${token}\" \"./${fileName}\" && \"./bin/${fileNameWithoutExt}${token}\"",
             "description": "コンパイル、実行を行うコマンド。"
+          },
+          "handy-graphic.token": {
+            "type": "string",
+            "default": "__hg_app"
           }
         }
       }

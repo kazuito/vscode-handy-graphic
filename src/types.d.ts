@@ -4,4 +4,5 @@ type FileInfo = {
   fileExt: string;
   fileAbsPath: string;
   dirAbsPath: string;
+  token: string;
 };
